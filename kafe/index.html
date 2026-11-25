@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Kafe</title>
+<meta property="og:title" content="Kafeniz için web sitesi örneği">
+<meta property="og:description" content="Menü, fiyatlar, çalışma saatleri ve yol tarifi tek sayfada.">
+<meta property="og:image" content="https://kaanamanvermez.github.io/ornek/img/kafe-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak.css">
+<style>
+  :root {
+    --zemin: #24150f; --yuzey: #2f1d15; --metin: #f3e7d3; --soluk: #c4ae94;
+    --vurgu: #e0a33a; --vurgu-ustu: #24150f;
+    --cizgi: #46301f; --cizgi-koyu: #7a5a3c;
+    --serit-zemin: #9e2a20; --serit-metin: #f8ecd9;
+    --baslik-yazi: "Young Serif", Georgia, serif; --baslik-kalinlik: 400; --h2-kalinlik: 400;
+    --baslik-aralik: -0.02em;
+    --govde-yazi: "Figtree", system-ui, sans-serif;
+    --foto-kose: 6px; --galeri-sutun: 2;
+    --acik-renk: #8fd19a;
+  }
+  .kahraman .foto { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 45% 70%; }
+  @media (min-width: 860px) { .kahraman .foto { aspect-ratio: 21 / 8; object-position: 50% 62%; } }
+  .kahraman .kap { margin-top: -0.6em; font-size: var(--ad-boy, clamp(3rem, 14vw, 8.5rem)); }
+  .kahraman .kap > * { font-size: 1rem; }
+  .kahraman .ad { font-size: inherit; line-height: 0.95; text-shadow: 0 2px 28px rgba(20, 10, 6, 0.6); }
+  .kahraman .kap:has(.ad[data-uzun="orta"]) { --ad-boy: clamp(2.5rem, 10.5vw, 6.5rem); }
+  .kahraman .kap:has(.ad[data-uzun="cok"]) { --ad-boy: clamp(2rem, 8vw, 4.75rem); }
+
+  .sekmeler { display: flex; gap: 0.5rem; overflow-x: auto; margin: 0 0 1.5rem; padding-bottom: 0.25rem; }
+  .sekmeler button {
+    flex: none; font: inherit; font-weight: 600; font-size: 0.95rem;
+    padding: 0.55rem 1.1rem; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--metin); border: 1.5px solid var(--cizgi-koyu);
+  }
+  .sekmeler button[aria-selected="true"] { background: var(--vurgu); color: var(--vurgu-ustu); border-color: var(--vurgu); }
+  .fiyatlar .tutar { font-family: var(--baslik-yazi); font-size: 1.2rem; font-weight: 400; }
+  .yerel { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; font-weight: 600; color: var(--vurgu); vertical-align: 0.1em; }
+</style>
+</head>
+<body data-varsayilan="Köşe Kahve" data-tur="Kafe"
+      data-saatler='{"1":["08:00","23:00"],"2":["08:00","23:00"],"3":["08:00","23:00"],"4":["08:00","23:00"],"5":["08:00","23:00"],"6":["08:00","23:00"],"0":["09:00","23:00"]}'>
+
+<div class="ornek-serit"><div class="kap">
+  <span>Bu sayfa <b data-ad></b> için hazırlanmış bir örnektir. Menü, fiyat ve fotoğraflar temsilidir.</span>
+  <span>Hazırlayan: Eyüp Kaan Amanvermez</span>
+</div></div>
+
+<header class="kahraman">
+  <img class="foto" src="../img/kafe-1.jpg" alt="Desenli masada bir fincan Türk kahvesi" width="1400" height="933">
+  <div class="kap">
+    <h1 class="ad" data-ad>Köşe Kahve</h1>
+    <p class="slogan">Sabah kahvaltısından akşam kahvesine. Menü, fiyatlar ve yol tarifi burada.</p>
+    <p class="durum" aria-live="polite"></p>
+    <div class="eylemler">
+      <a class="dugme" href="#menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Menüyü gör</a>
+      <a class="dugme dugme--ikincil" href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Masa ayırt</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="bolum" id="menu" aria-labelledby="menu-baslik">
+    <div class="kap dar">
+      <h2 id="menu-baslik">Menü</h2>
+      <p class="aciklama">Güncel fiyatlar. Menüyü değiştirdiğinizde burası da aynı gün güncellenir.</p>
+      <div class="sekmeler" role="tablist" aria-label="Menü bölümleri">
+        <button role="tab" id="s1" aria-controls="m1" aria-selected="true">Kahvaltı</button>
+        <button role="tab" id="s2" aria-controls="m2" aria-selected="false" tabindex="-1">Sıcak içecekler</button>
+        <button role="tab" id="s3" aria-controls="m3" aria-selected="false" tabindex="-1">Tatlılar</button>
+      </div>
+      <ul class="fiyatlar" id="m1" role="tabpanel" aria-labelledby="s1">
+        <li><span class="is">Serpme kahvaltı<span class="not">İki kişilik, sınırsız çay ile</span></span><span class="nokta"></span><span class="tutar">1.200 TL</span></li>
+        <li><span class="is">Kuymak<span class="yerel">Karadeniz</span><span class="not">Mısır unu, tereyağı ve kolot peyniri</span></span><span class="nokta"></span><span class="tutar">320 TL</span></li>
+        <li><span class="is">Kahvaltı tabağı</span><span class="nokta"></span><span class="tutar">450 TL</span></li>
+        <li><span class="is">Menemen</span><span class="nokta"></span><span class="tutar">220 TL</span></li>
+        <li><span class="is">Sucuklu yumurta</span><span class="nokta"></span><span class="tutar">260 TL</span></li>
+        <li><span class="is">Peynirli gözleme</span><span class="nokta"></span><span class="tutar">180 TL</span></li>
+      </ul>
+      <ul class="fiyatlar" id="m2" role="tabpanel" aria-labelledby="s2" hidden>
+        <li><span class="is">Çay<span class="not">İnce belli bardakta</span></span><span class="nokta"></span><span class="tutar">30 TL</span></li>
+        <li><span class="is">Türk kahvesi<span class="not">Yanında lokum ile</span></span><span class="nokta"></span><span class="tutar">120 TL</span></li>
+        <li><span class="is">Filtre kahve</span><span class="nokta"></span><span class="tutar">130 TL</span></li>
+        <li><span class="is">Latte</span><span class="nokta"></span><span class="tutar">150 TL</span></li>
+        <li><span class="is">Sahlep</span><span class="nokta"></span><span class="tutar">140 TL</span></li>
+        <li><span class="is">Sıcak çikolata</span><span class="nokta"></span><span class="tutar">150 TL</span></li>
+      </ul>
+      <ul class="fiyatlar" id="m3" role="tabpanel" aria-labelledby="s3" hidden>
+        <li><span class="is">Laz böreği<span class="yerel">Karadeniz</span></span><span class="nokta"></span><span class="tutar">180 TL</span></li>
+        <li><span class="is">San Sebastian cheesecake</span><span class="nokta"></span><span class="tutar">210 TL</span></li>
+        <li><span class="is">Sufle<span class="not">Dondurma ile</span></span><span class="nokta"></span><span class="tutar">200 TL</span></li>
+        <li><span class="is">Fırın sütlaç</span><span class="nokta"></span><span class="tutar">150 TL</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="bolum" aria-labelledby="mekan">
+    <div class="kap">
+      <h2 id="mekan">Mekândan</h2>
+      <p class="aciklama">Gerçek sitede burada sizin mekânınızın ve ürünlerinizin fotoğrafları yer alır.</p>
+      <div class="galeri">
+        <img src="../img/kafe-2.jpg" alt="Kilim desenli masada Türk kahvesi" loading="lazy" width="900" height="1350">
+        <img src="../img/kafe-3.jpg" alt="Tuğla duvar önünde renkli sandalyeli masa" loading="lazy" width="900" height="1200">
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum" id="konum" aria-labelledby="saatler-baslik">
+    <div class="kap konum">
+      <div>
+        <h2 id="saatler-baslik">Saatler ve konum</h2>
+        <table class="saatler"><tbody></tbody></table>
+        <p class="adres">Haritada "<span data-ad></span>, <span data-sehir></span>" araması görünüyor. Gerçek sitede açık adresiniz burada yazar.</p>
+        <div class="eylemler"><a class="dugme dugme--ikincil" href="#konum" data-yol>Yol tarifi al</a></div>
+      </div>
+      <iframe class="harita" title="Harita" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="alt">
+  <div class="kap">
+    <div><strong data-ad>Köşe Kahve</strong><br><a href="#" data-ornek="instagram">Instagram</a></div>
+    <div>Bu sayfa bir örnektir.<br>Hazırlayan: Eyüp Kaan Amanvermez</div>
+  </div>
+</footer>
+
+<nav class="alt-cubuk" aria-label="Hızlı erişim">
+  <a href="#menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Menü</a>
+  <a href="#" data-ornek="ara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Ara</a>
+  <a href="#konum" data-yol><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Yol tarifi</a>
+</nav>
+
+<script src="../ortak.js"></script>
+</body>
+</html>

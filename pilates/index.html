@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pilates stüdyosu</title>
+<meta property="og:title" content="Stüdyonuz için web sitesi örneği">
+<meta property="og:description" content="Ders programı, paketler, konum ve WhatsApp'tan deneme dersi tek sayfada.">
+<meta property="og:image" content="https://kaanamanvermez.github.io/ornek/img/pilates-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak.css">
+<style>
+  :root {
+    --zemin: #eef1ee; --yuzey: #ffffff; --metin: #1e2a26; --soluk: #56635e;
+    --vurgu: #2f5d50; --vurgu-ustu: #ffffff;
+    --cizgi: #d3dbd6; --cizgi-koyu: #a7b3ac;
+    --serit-zemin: #2f5d50; --serit-metin: #eef1ee;
+    --baslik-yazi: "Instrument Serif", Georgia, serif; --baslik-kalinlik: 400; --h2-kalinlik: 400;
+    --baslik-aralik: -0.015em;
+    --govde-yazi: "DM Sans", system-ui, sans-serif;
+    --foto-kose: 14px; --dugme-kose: 999px;
+    --acik-renk: #2f9e6a; --cubuk-zemin: #ffffff;
+  }
+  .kahraman { padding: clamp(2.5rem, 7vw, 5rem) 0 0; }
+  .kahraman .kap { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .kahraman .kap { grid-template-columns: 1.05fr 1fr; align-items: center; } }
+  .kahraman .ad { line-height: 0.95; }
+  .kahraman .foto { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--foto-kose); }
+  @media (min-width: 860px) { .kahraman .foto { aspect-ratio: 4 / 5; } }
+
+  .program { display: grid; gap: 0; }
+  .program .gun { display: grid; grid-template-columns: 5.6rem 1fr; gap: 0.5rem; padding: 0.75rem 0; border-bottom: 1px solid var(--cizgi); align-items: start; }
+  .program .gun > span { font-weight: 700; padding-top: 0.25rem; font-size: 0.95rem; }
+  .program ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .program li { background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: 999px; padding: 0.2rem 0.6rem; font-size: 0.84rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .program li b { font-weight: 700; margin-right: 0.35rem; }
+  .program li[data-tur="mat"] { background: transparent; border-style: dashed; border-color: var(--cizgi-koyu); }
+  .program-not { margin-top: 1rem; font-size: 0.9rem; color: var(--soluk); }
+
+  .paketler { display: grid; gap: 1rem; }
+  @media (min-width: 700px) { .paketler { grid-template-columns: repeat(2, 1fr); } }
+  .paket { background: var(--yuzey); border-radius: var(--foto-kose); padding: 1.5rem; }
+  .paket h3 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  .paket .tutar { display: block; margin: 0.5rem 0 0.25rem; font-family: var(--baslik-yazi); font-size: 2.6rem; line-height: 1; }
+  .paket p { margin: 0; color: var(--soluk); font-size: 0.95rem; }
+  .paket--one { background: var(--vurgu); color: #fff; }
+  .paket--one p { color: #d5e6df; }
+
+  .studyo { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .studyo { grid-template-columns: 1fr 1.1fr; align-items: center; } }
+  .studyo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--foto-kose); }
+  .studyo ul { margin: 0; padding: 0; list-style: none; }
+  .studyo li { padding: 1rem 0; border-bottom: 1px solid var(--cizgi); }
+  .studyo li b { display: block; font-size: 1.1rem; }
+  .studyo li span { color: var(--soluk); }
+</style>
+</head>
+<body data-varsayilan="Denge Pilates" data-tur="Pilates stüdyosu"
+      data-saatler='{"1":["07:30","21:30"],"2":["07:30","21:30"],"3":["07:30","21:30"],"4":["07:30","21:30"],"5":["07:30","21:30"],"6":["09:00","17:00"],"0":null}'>
+
+<div class="ornek-serit"><div class="kap">
+  <span>Bu sayfa <b data-ad></b> için hazırlanmış bir örnektir. Program, fiyat ve fotoğraflar temsilidir.</span>
+  <span>Hazırlayan: Eyüp Kaan Amanvermez</span>
+</div></div>
+
+<header class="kahraman">
+  <div class="kap">
+    <div>
+      <h1 class="ad" data-ad>Denge Pilates</h1>
+      <p class="slogan">Reformer ve mat pilates, en fazla 6 kişilik gruplarda. İlk dersiniz deneme dersi.</p>
+      <p class="durum" aria-live="polite"></p>
+      <div class="eylemler">
+        <a class="dugme" href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Deneme dersi ayırt</a>
+        <a class="dugme dugme--ikincil" href="#program">Ders programı</a>
+      </div>
+    </div>
+    <img class="foto" src="../img/pilates-1.jpg" alt="Reformer aletleri olan aydınlık pilates stüdyosu" width="1400" height="933">
+  </div>
+</header>
+
+<main>
+  <section class="bolum" id="program" aria-labelledby="program-baslik">
+    <div class="kap dar">
+      <h2 id="program-baslik">Haftalık ders programı</h2>
+      <p class="aciklama">Yerinizi WhatsApp'tan ayırtın. Program değişince burası da güncellenir.</p>
+      <div class="program">
+        <div class="gun"><span>Pazartesi</span><ul><li><b>08.00</b>Reformer</li><li><b>18.00</b>Reformer</li><li data-tur="mat"><b>19.15</b>Mat</li></ul></div>
+        <div class="gun"><span>Salı</span><ul><li><b>09.30</b>Reformer</li><li><b>18.30</b>Reformer</li><li><b>20.00</b>Reformer</li></ul></div>
+        <div class="gun"><span>Çarşamba</span><ul><li><b>08.00</b>Reformer</li><li data-tur="mat"><b>12.30</b>Mat</li><li><b>18.00</b>Reformer</li></ul></div>
+        <div class="gun"><span>Perşembe</span><ul><li><b>09.30</b>Reformer</li><li><b>18.30</b>Reformer</li><li><b>20.00</b>Reformer</li></ul></div>
+        <div class="gun"><span>Cuma</span><ul><li><b>08.00</b>Reformer</li><li><b>18.00</b>Reformer</li><li data-tur="mat"><b>19.15</b>Mat</li></ul></div>
+        <div class="gun"><span>Cumartesi</span><ul><li><b>10.00</b>Reformer</li><li data-tur="mat"><b>11.30</b>Mat</li><li><b>14.00</b>Reformer</li></ul></div>
+      </div>
+      <p class="program-not">Kesik çizgili dersler mat pilates, diğerleri reformer.</p>
+    </div>
+  </section>
+
+  <section class="bolum" aria-labelledby="paket-baslik">
+    <div class="kap dar">
+      <h2 id="paket-baslik">Paketler</h2>
+      <p class="aciklama">Paketler satın aldığınız günden itibaren 30 gün geçerli.</p>
+      <div class="paketler">
+        <div class="paket paket--one"><h3>Deneme dersi</h3><span class="tutar">500 TL</span><p>Duruş analizi ve tanışma, tek seferlik.</p></div>
+        <div class="paket"><h3>Ayda 8 ders</h3><span class="tutar">4.800 TL</span><p>Haftada iki ders, ders başı 600 TL.</p></div>
+        <div class="paket"><h3>Ayda 12 ders</h3><span class="tutar">6.600 TL</span><p>Haftada üç ders, ders başı 550 TL.</p></div>
+        <div class="paket"><h3>Özel ders</h3><span class="tutar">1.200 TL</span><p>Bire bir, size göre program.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum" aria-labelledby="studyo-baslik">
+    <div class="kap studyo">
+      <img src="../img/pilates-2.jpg" alt="Cadillac aletinde pilates yapan kadın" loading="lazy" width="900" height="1350">
+      <div>
+        <h2 id="studyo-baslik">Stüdyoda sizi ne bekliyor</h2>
+        <ul>
+          <li><b>Küçük gruplar</b><span>Bir derste en fazla 6 kişi, eğitmen herkesi görür.</span></li>
+          <li><b>Size göre başlangıç</b><span>İlk derste duruşunuza bakılır, program ona göre kurulur.</span></li>
+          <li><b>Esnek ders saatleri</b><span>Sabah, öğle ve akşam dersleri. Kaçırdığınız dersi aynı hafta telafi edebilirsiniz.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum" id="konum" aria-labelledby="saatler-baslik">
+    <div class="kap konum">
+      <div>
+        <h2 id="saatler-baslik">Saatler ve konum</h2>
+        <table class="saatler"><tbody></tbody></table>
+        <p class="adres">Haritada "<span data-ad></span>, <span data-sehir></span>" araması görünüyor. Gerçek sitede açık adresiniz burada yazar.</p>
+        <div class="eylemler"><a class="dugme dugme--ikincil" href="#konum" data-yol>Yol tarifi al</a></div>
+      </div>
+      <iframe class="harita" title="Harita" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="alt">
+  <div class="kap">
+    <div><strong data-ad>Denge Pilates</strong><br><a href="#" data-ornek="instagram">Instagram</a></div>
+    <div>Bu sayfa bir örnektir.<br>Hazırlayan: Eyüp Kaan Amanvermez</div>
+  </div>
+</footer>
+
+<nav class="alt-cubuk" aria-label="Hızlı erişim">
+  <a href="#program"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Program</a>
+  <a href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Ders ayırt</a>
+  <a href="#konum" data-yol><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Yol tarifi</a>
+</nav>
+
+<script src="../ortak.js"></script>
+</body>
+</html>

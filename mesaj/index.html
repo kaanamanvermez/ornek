@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mesaj hazırla</title>
+<style>
+  :root { --z: #f4f5f7; --k: #ffffff; --m: #16181d; --s: #5c6370; --v: #1f5fd1; --c: #dfe2e8; --y: #1d7a46; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--z); color: var(--m); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { width: min(100% - 2rem, 34rem); margin: 0 auto; padding: 1.5rem 0 4rem; }
+  h1 { font-size: 1.35rem; margin: 0 0 0.25rem; }
+  h2 { font-size: 1.05rem; margin: 2rem 0 0.75rem; }
+  .ust { color: var(--s); margin: 0 0 1.25rem; font-size: 0.95rem; }
+  .kart { background: var(--k); border: 1px solid var(--c); border-radius: 14px; padding: 1rem; }
+  label { display: block; font-weight: 600; font-size: 0.95rem; margin: 0 0 0.35rem; }
+  input[type=text] { width: 100%; font: inherit; font-size: 1.05rem; padding: 0.7rem 0.8rem; border: 1.5px solid var(--c); border-radius: 10px; background: #fff; }
+  input[type=text]:focus { outline: 3px solid color-mix(in srgb, var(--v) 35%, transparent); border-color: var(--v); }
+  .alan + .alan { margin-top: 1rem; }
+  .kollar { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .kollar input { position: absolute; opacity: 0; }
+  .kollar span { display: block; text-align: center; padding: 0.65rem 0.5rem; border: 1.5px solid var(--c); border-radius: 10px; font-weight: 600; cursor: pointer; background: #fff; }
+  .kollar input:checked + span { border-color: var(--v); background: color-mix(in srgb, var(--v) 9%, #fff); color: var(--v); }
+  .kollar input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--v) 35%, transparent); }
+  textarea { width: 100%; min-height: 15rem; font: inherit; font-size: 0.98rem; padding: 0.8rem; border: 1.5px solid var(--c); border-radius: 10px; resize: vertical; background: #fff; }
+  .dugmeler { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+  button, .onizle { font: inherit; font-weight: 650; padding: 0.7rem 1rem; border-radius: 10px; border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+  .ana { background: var(--v); color: #fff; flex: 1; justify-content: center; min-height: 3rem; }
+  .onizle, .ikincil { background: #fff; color: var(--m); border: 1.5px solid var(--c); }
+  .durum { min-height: 1.5rem; margin: 0.5rem 0 0; color: var(--y); font-weight: 600; font-size: 0.95rem; }
+  .bos { color: var(--s); font-size: 0.95rem; }
+  details { background: var(--k); border: 1px solid var(--c); border-radius: 12px; padding: 0.85rem 1rem; }
+  details + details { margin-top: 0.5rem; }
+  summary { font-weight: 650; cursor: pointer; }
+  details p { margin: 0.6rem 0 0.5rem; white-space: pre-line; }
+  .liste { list-style: none; margin: 0; padding: 0; }
+  .liste li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--c); font-size: 0.95rem; }
+  .liste li span:last-child { color: var(--s); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mesaj hazırla</h1>
+  <p class="ust">İşletmenin adını yazın, iş kolunu seçin, mesajı kopyalayıp Instagram'da işletmeye yapıştırın. Günde 15 civarı, elle.</p>
+
+  <div class="kart">
+    <div class="alan">
+      <label for="ad">İşletmenin adı</label>
+      <input type="text" id="ad" autocomplete="off" placeholder="Örneğin: Berber Şükrü Usta">
+    </div>
+    <div class="alan">
+      <label id="kol-etiket">İş kolu</label>
+      <div class="kollar" role="radiogroup" aria-labelledby="kol-etiket">
+        <label><input type="radio" name="kol" value="berber" checked><span>Berber</span></label>
+        <label><input type="radio" name="kol" value="kafe"><span>Kafe</span></label>
+        <label><input type="radio" name="kol" value="pilates"><span>Pilates</span></label>
+        <label><input type="radio" name="kol" value="diyetisyen"><span>Diyetisyen</span></label>
+      </div>
+    </div>
+    <div class="alan">
+      <label for="sehir">Şehir</label>
+      <input type="text" id="sehir" value="Trabzon" autocomplete="off">
+    </div>
+  </div>
+
+  <h2>Gönderilecek mesaj</h2>
+  <textarea id="mesaj" aria-label="Gönderilecek mesaj"></textarea>
+  <div class="dugmeler">
+    <button class="ana" id="kopyala" type="button">Mesajı kopyala</button>
+    <a class="onizle" id="onizle" href="#" target="_blank" rel="noopener">Örneği aç</a>
+  </div>
+  <p class="durum" id="durum" role="status"></p>
+
+  <h2>Cevap gelirse</h2>
+  <div id="kaliplar"></div>
+
+  <h2>Mesaj gönderdikleriniz</h2>
+  <ul class="liste" id="liste"></ul>
+  <div class="dugmeler"><button class="ikincil" id="liste-kopyala" type="button">Listeyi kopyala</button></div>
+</main>
+
+<script>
+(function () {
+  var TABAN = 'https://kaanamanvermez.github.io/ornek/';
+  var OZELLIK = {
+    berber: 'Fiyat listeniz, çalışma saatleriniz, konumunuz ve WhatsApp\'tan randevu',
+    kafe: 'Menünüz, fiyatlarınız, çalışma saatleriniz ve yol tarifi',
+    pilates: 'Ders programınız, paketleriniz ve WhatsApp\'tan deneme dersi',
+    diyetisyen: 'Hizmetleriniz, çalışma şekliniz ve WhatsApp\'tan randevu'
+  };
+  var KALIPLAR = [
+    ['Fiyat ne kadar, neler dahil?', 'Tek seferlik 3.500 TL, aylık ücret yok. Sizin fotoğraflarınız, fiyat listeniz (ya da menünüz), çalışma saatleriniz, haritada konumunuz ve WhatsApp butonu dahil. Yayından sonraki ilk ay küçük değişiklikleri ücretsiz yaparım.'],
+    ['Ne lazım?', 'Logonuz varsa logo, 5-10 fotoğraf, hizmet ve fiyat listeniz (ya da menünüz), çalışma saatleriniz, açık adresiniz, WhatsApp numaranız ve Instagram hesabınız. Hepsini buradan atabilirsiniz.'],
+    ['Adresi ne olacak, alan adı?', 'Site ücretsiz bir adreste yayına girer. İsterseniz isletmeniz.com gibi kendi adresinizi de bağlarım. Onun yıllık ücreti yaklaşık 500-600 TL, alan adı firmasına ödenir.'],
+    ['Ödeme nasıl?', 'Site yayına girince, siz bakıp onayladıktan sonra havale ya da EFT ile. Önden hiçbir ödeme yok.'],
+    ['Pahalı', 'Ajanslarda tek sayfalık site 10.000 TL\'den başlıyor. Ben hazır tasarım üzerinden çalıştığım için 3.500 TL. Beğenmezseniz de hiçbir ücret ödemezsiniz.'],
+    ['Yapay zekâ ile mi yapıyorsun?', 'Tasarımda ve kodda yapay zekâ araçlarından yararlanıyorum. Sitenin her parçasını ben kontrol edip yayına alıyorum.'],
+    ['Düşüneyim', 'Tabii, acelesi yok. Örnek bağlantı sizde kalsın, aklınıza takılan bir şey olursa buradan yazabilirsiniz.'],
+    ['İki gün cevap gelmezse (tek kez)', 'Merhaba, geçen gün gönderdiğim site örneğine bakabildiniz mi? Sorunuz olursa buradan yazabilirsiniz.']
+  ];
+
+  var ad = document.getElementById('ad'), sehir = document.getElementById('sehir');
+  var mesaj = document.getElementById('mesaj'), onizle = document.getElementById('onizle');
+  var durum = document.getElementById('durum');
+
+  function kol() { return document.querySelector('input[name=kol]:checked').value; }
+  function parca(s) { return encodeURIComponent(s.trim().replace(/\s+/g, '-')); }
+  function baglanti() {
+    var a = ad.value.trim(), s = sehir.value.trim();
+    var u = TABAN + kol() + '/';
+    var q = [];
+    if (a) q.push('ad=' + parca(a));
+    if (s && s.toLocaleLowerCase('tr') !== 'trabzon') q.push('sehir=' + parca(s));
+    return q.length ? u + '?' + q.join('&') : u;
+  }
+  function guncelle() {
+    var a = ad.value.trim() || '[işletmenin adı]';
+    var u = baglanti();
+    onizle.href = u;
+    mesaj.value = 'Merhaba, ' + a + ' için bir web sitesi örneği hazırladım. ' + OZELLIK[kol()] +
+      ' tek sayfada, telefondan rahatça açılıyor:\n' + u +
+      '\n\nBeğenirseniz kendi fotoğraflarınız ve bilgilerinizle 1-2 gün içinde yayına alırım. Ücreti tek seferlik 3.500 TL, ödemeyi site yayına girince alıyorum. Beğenmezseniz hiçbir ücret yok.';
+    durum.textContent = '';
+  }
+  [ad, sehir].forEach(function (e) { e.addEventListener('input', guncelle); });
+  document.querySelectorAll('input[name=kol]').forEach(function (e) { e.addEventListener('change', guncelle); });
+
+  function kopyala(metin, tamam) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(metin).then(tamam, function () { eski(metin); tamam(); });
+    } else { eski(metin); tamam(); }
+  }
+  function eski(metin) {
+    var t = document.createElement('textarea'); t.value = metin; document.body.append(t);
+    t.select(); document.execCommand('copy'); t.remove();
+  }
+
+  // Gönderilenler bu telefonda saklanır, başka yere gitmez
+  var ANAHTAR = 'gonderilenler';
+  function oku() { try { return JSON.parse(localStorage.getItem(ANAHTAR)) || []; } catch (e) { return []; } }
+  function listele() {
+    var l = oku(), ul = document.getElementById('liste'); ul.textContent = '';
+    if (!l.length) { var b = document.createElement('li'); b.className = 'bos'; b.textContent = 'Henüz yok. Mesajı kopyaladığınız işletmeler burada birikir.'; ul.append(b); return; }
+    l.slice().reverse().forEach(function (x) {
+      var li = document.createElement('li'), a = document.createElement('span'), t = document.createElement('span');
+      a.textContent = x.ad + ' (' + x.kol + ')'; t.textContent = x.tarih; li.append(a, t); ul.append(li);
+    });
+  }
+  document.getElementById('kopyala').addEventListener('click', function () {
+    if (!ad.value.trim()) { durum.style.color = '#b3261e'; durum.textContent = 'Önce işletmenin adını yazın.'; ad.focus(); return; }
+    kopyala(mesaj.value, function () {
+      var l = oku(), simdi = new Date();
+      var tarih = simdi.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' }) + ' ' + simdi.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+      if (!l.some(function (x) { return x.ad === ad.value.trim() && x.kol === kol(); })) {
+        l.push({ ad: ad.value.trim(), kol: kol(), tarih: tarih }); localStorage.setItem(ANAHTAR, JSON.stringify(l));
+      }
+      listele();
+      durum.style.color = ''; durum.textContent = 'Kopyalandı. Instagram\'da işletmenin mesaj kutusuna yapıştırın.';
+    });
+  });
+  document.getElementById('liste-kopyala').addEventListener('click', function () {
+    var l = oku();
+    var metin = l.map(function (x) { return x.tarih + ' | ' + x.ad + ' | ' + x.kol; }).join('\n') || 'Liste boş';
+    kopyala(metin, function () { durum.style.color = ''; durum.textContent = 'Liste kopyalandı.'; });
+  });
+
+  var kap = document.getElementById('kaliplar');
+  KALIPLAR.forEach(function (k) {
+    var d = document.createElement('details'), s = document.createElement('summary'), p = document.createElement('p'), b = document.createElement('button');
+    s.textContent = k[0]; p.textContent = k[1]; b.type = 'button'; b.className = 'ikincil'; b.textContent = 'Kopyala';
+    b.addEventListener('click', function () { kopyala(k[1], function () { b.textContent = 'Kopyalandı'; setTimeout(function () { b.textContent = 'Kopyala'; }, 1800); }); });
+    d.append(s, p, b); kap.append(d);
+  });
+
+  guncelle(); listele();
+})();
+</script>
+</body>
+</html>

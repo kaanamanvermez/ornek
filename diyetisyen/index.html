@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Diyetisyen</title>
+<meta property="og:title" content="Diyetisyen için web sitesi örneği">
+<meta property="og:description" content="Hizmetler, çalışma şekli, sık sorulanlar ve WhatsApp'tan randevu tek sayfada.">
+<meta property="og:image" content="https://kaanamanvermez.github.io/ornek/img/diyetisyen-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak.css">
+<style>
+  :root {
+    --zemin: #fbfcf8; --yuzey: #f0f4ea; --metin: #1d2420; --soluk: #56615a;
+    --vurgu: #3f6b2a; --vurgu-ustu: #ffffff; --pancar: #7b2a5a;
+    --cizgi: #dde4d5; --cizgi-koyu: #b4c0ab;
+    --serit-zemin: #7b2a5a; --serit-metin: #fbf3f7;
+    --baslik-yazi: "Fraunces", Georgia, serif; --baslik-kalinlik: 600; --h2-kalinlik: 600;
+    --baslik-aralik: -0.025em;
+    --govde-yazi: "Plus Jakarta Sans", system-ui, sans-serif;
+    --foto-kose: 18px; --dugme-kose: 999px;
+    --acik-renk: #3f9a3a; --cubuk-zemin: #ffffff;
+  }
+  .kahraman { padding: clamp(2.5rem, 7vw, 5rem) 0 0; overflow: hidden; }
+  .kahraman .kap { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 860px) { .kahraman .kap { grid-template-columns: 1.15fr 1fr; } }
+  .unvan { margin: 0 0 0.75rem; font-weight: 600; color: var(--pancar); }
+  .kahraman .ad { line-height: 0.98; }
+  .tabak { position: relative; width: min(100%, 30rem); justify-self: center; }
+  .tabak img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; object-position: 50% 50%; }
+  .tabak::after {
+    content: ""; position: absolute; inset: -0.9rem; border-radius: 50%;
+    border: 2px solid var(--cizgi-koyu); pointer-events: none;
+  }
+
+  .adimlar { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .adimlar { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .adimlar img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--foto-kose); }
+  .adimlar ol { list-style: none; counter-reset: adim; margin: 0; padding: 0; }
+  .adimlar li { counter-increment: adim; display: grid; grid-template-columns: 3rem 1fr; gap: 0.25rem 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--cizgi); }
+  .adimlar li::before {
+    content: counter(adim); grid-row: span 2;
+    font-family: var(--baslik-yazi); font-size: 2.25rem; line-height: 1; color: var(--vurgu);
+  }
+  .adimlar li b { font-size: 1.1rem; }
+  .adimlar li span { color: var(--soluk); }
+
+  .hizmetler { display: grid; gap: 0.75rem; }
+  @media (min-width: 700px) { .hizmetler { grid-template-columns: repeat(2, 1fr); } }
+  .hizmet { background: var(--yuzey); border-radius: 14px; padding: 1.25rem 1.4rem; }
+  .hizmet h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+  .hizmet p { margin: 0; color: var(--soluk); font-size: 0.975rem; }
+
+  .sss details { border-bottom: 1px solid var(--cizgi); padding: 1rem 0; }
+  .sss summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+  .sss summary::-webkit-details-marker { display: none; }
+  .sss summary::after { content: "+"; font-family: var(--baslik-yazi); font-size: 1.5rem; line-height: 1; color: var(--vurgu); }
+  .sss details[open] summary::after { content: "-"; }
+  .sss p { margin: 0.6rem 0 0; color: var(--soluk); }
+</style>
+</head>
+<body data-varsayilan="Dyt. Selin Aydın" data-tur="Diyetisyen"
+      data-saatler='{"1":["09:00","19:00"],"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["10:00","14:00"],"0":null}'>
+
+<div class="ornek-serit"><div class="kap">
+  <span>Bu sayfa <b data-ad></b> için hazırlanmış bir örnektir. Metin, saat ve fotoğraflar temsilidir.</span>
+  <span>Hazırlayan: Eyüp Kaan Amanvermez</span>
+</div></div>
+
+<header class="kahraman">
+  <div class="kap">
+    <div>
+      <p class="unvan">Diyetisyen, <span data-sehir></span></p>
+      <h1 class="ad" data-ad>Dyt. Selin Aydın</h1>
+      <p class="slogan">Yasak listesiyle değil, sizin hayatınıza uyan bir planla. Online ya da yüz yüze görüşme.</p>
+      <p class="durum" aria-live="polite"></p>
+      <div class="eylemler">
+        <a class="dugme" href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>WhatsApp'tan randevu al</a>
+        <a class="dugme dugme--ikincil" href="#hizmetler">Hizmetler</a>
+      </div>
+    </div>
+    <div class="tabak"><img src="../img/diyetisyen-1.jpg" alt="Sebze, nohut ve avokadolu renkli salata tabağı" width="1400" height="933"></div>
+  </div>
+</header>
+
+<main>
+  <section class="bolum" aria-labelledby="adim-baslik">
+    <div class="kap adimlar">
+      <div>
+        <h2 id="adim-baslik">Nasıl çalışıyoruz</h2>
+        <ol>
+          <li><b>Ön görüşme</b><span>Alışkanlıklarınızı, tahlillerinizi ve hedefinizi konuşuruz.</span></li>
+          <li><b>Size özel plan</b><span>Sevdiğiniz yemekler ve günlük düzeninizle haftalık plan hazırlanır.</span></li>
+          <li><b>Düzenli takip</b><span>İki haftada bir ölçüm yapılır, plan gidişe göre güncellenir.</span></li>
+        </ol>
+      </div>
+      <img src="../img/diyetisyen-2.jpg" alt="Masada not defteri ve sağlıklı kahvaltı kâseleri" loading="lazy" width="900" height="595">
+    </div>
+  </section>
+
+  <section class="bolum" id="hizmetler" aria-labelledby="hizmet-baslik">
+    <div class="kap">
+      <h2 id="hizmet-baslik">Hizmetler</h2>
+      <p class="aciklama">Görüşme ücretleri ve uygun saatler için WhatsApp'tan yazabilirsiniz.</p>
+      <div class="hizmetler">
+        <div class="hizmet"><h3>Online diyet</h3><p>Görüntülü görüşme ve mesajla takip. Şehir dışından da olur.</p></div>
+        <div class="hizmet"><h3>Yüz yüze diyet</h3><p>Muayenehanede ölçüm ve görüşme.</p></div>
+        <div class="hizmet"><h3>Sporcu beslenmesi</h3><p>Antrenman ve maç günlerine göre plan.</p></div>
+        <div class="hizmet"><h3>Hamilelik ve emzirme dönemi</h3><p>Anne ve bebek için dengeli beslenme.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum sss" aria-labelledby="sss-baslik">
+    <div class="kap dar">
+      <h2 id="sss-baslik">Sık sorulanlar</h2>
+      <details><summary>Online görüşme nasıl oluyor?</summary><p>Randevu saatinde görüntülü arama yapılır. Planınız aynı gün telefonunuza gönderilir, takip mesajla sürer.</p></details>
+      <details><summary>İlk görüşmeye ne getirmeliyim?</summary><p>Son üç ay içindeki kan tahlilleriniz varsa onları getirin. Yoksa ihtiyaç olup olmadığı görüşmede konuşulur.</p></details>
+      <details><summary>Plan ne sıklıkla güncelleniyor?</summary><p>İki haftada bir yapılan ölçümden sonra. Arada sorun olursa mesajla yazabilirsiniz.</p></details>
+    </div>
+  </section>
+
+  <section class="bolum" id="konum" aria-labelledby="saatler-baslik">
+    <div class="kap konum">
+      <div>
+        <h2 id="saatler-baslik">Saatler ve konum</h2>
+        <table class="saatler"><tbody></tbody></table>
+        <p class="adres">Haritada "<span data-ad></span>, <span data-sehir></span>" araması görünüyor. Gerçek sitede açık adresiniz burada yazar.</p>
+        <div class="eylemler"><a class="dugme dugme--ikincil" href="#konum" data-yol>Yol tarifi al</a></div>
+      </div>
+      <iframe class="harita" title="Harita" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="alt">
+  <div class="kap">
+    <div><strong data-ad>Dyt. Selin Aydın</strong><br><a href="#" data-ornek="instagram">Instagram</a></div>
+    <div>Bu sayfa bir örnektir.<br>Hazırlayan: Eyüp Kaan Amanvermez</div>
+  </div>
+</footer>
+
+<nav class="alt-cubuk" aria-label="Hızlı erişim">
+  <a href="#" data-ornek="ara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Ara</a>
+  <a href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Randevu</a>
+  <a href="#konum" data-yol><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Yol tarifi</a>
+</nav>
+
+<script src="../ortak.js"></script>
+</body>
+</html>

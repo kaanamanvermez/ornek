@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Berber</title>
+<meta property="og:title" content="Berberiniz için web sitesi örneği">
+<meta property="og:description" content="Fiyat listesi, çalışma saatleri, konum ve WhatsApp'tan randevu tek sayfada.">
+<meta property="og:image" content="https://kaanamanvermez.github.io/ornek/img/berber-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../ortak.css">
+<style>
+  :root {
+    --zemin: #13302a; --yuzey: #1a3b34; --metin: #efe8da; --soluk: #aebbb2;
+    --vurgu: #c9a45c; --vurgu-ustu: #13302a; --vurgu-metin: #d9b874;
+    --cizgi: #2c4c44; --cizgi-koyu: #5d6f5c;
+    --serit-zemin: #c9a45c; --serit-metin: #13302a;
+    --baslik-yazi: "Big Shoulders Display", Impact, sans-serif; --baslik-kalinlik: 800; --h2-kalinlik: 800;
+    --baslik-aralik: 0.005em;
+    --govde-yazi: "Manrope", system-ui, sans-serif;
+    --dugme-kose: 4px; --foto-kose: 2px;
+    --acik-renk: #7fd18f;
+  }
+  .kahraman .foto { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 60%; }
+  @media (min-width: 860px) { .kahraman .foto { aspect-ratio: 21 / 8; } }
+  .kahraman .kap { margin-top: -0.55em; font-size: var(--ad-boy, clamp(3rem, 14vw, 8.5rem)); }
+  .kahraman .kap > * { font-size: 1rem; }
+  .kahraman .ad { font-size: inherit; text-transform: uppercase; text-shadow: 0 2px 24px rgba(10, 28, 24, 0.55); }
+  .kahraman .kap:has(.ad[data-uzun="orta"]) { --ad-boy: clamp(2.5rem, 10.5vw, 6.5rem); }
+  .kahraman .kap:has(.ad[data-uzun="cok"]) { --ad-boy: clamp(2rem, 8vw, 4.75rem); }
+  .bolum h2 { text-transform: uppercase; letter-spacing: 0.01em; }
+  .fiyatlar .is { font-size: 1.0625rem; }
+  .fiyatlar .tutar { font-family: var(--baslik-yazi); font-size: 1.5rem; letter-spacing: 0.02em; }
+  .galeri img:first-child { aspect-ratio: 4 / 5; }
+</style>
+</head>
+<body data-varsayilan="Usta Berber" data-tur="Berber"
+      data-saatler='{"1":["09:00","21:00"],"2":["09:00","21:00"],"3":["09:00","21:00"],"4":["09:00","21:00"],"5":["09:00","21:00"],"6":["09:00","21:00"],"0":["11:00","18:00"]}'>
+
+<div class="ornek-serit"><div class="kap">
+  <span>Bu sayfa <b data-ad></b> için hazırlanmış bir örnektir. Fiyat, saat ve fotoğraflar temsilidir.</span>
+  <span>Hazırlayan: Eyüp Kaan Amanvermez</span>
+</div></div>
+
+<header class="kahraman">
+  <img class="foto" src="../img/berber-1.jpg" alt="Deri berber koltuğu ve aynalar" width="1400" height="933">
+  <div class="kap">
+    <h1 class="ad" data-ad>Usta Berber</h1>
+    <p class="slogan">Saç, sakal ve bakım. Randevunuzu WhatsApp'tan alın, sıra beklemeyin.</p>
+    <p class="durum" aria-live="polite"></p>
+    <div class="eylemler">
+      <a class="dugme" href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>WhatsApp'tan randevu al</a>
+      <a class="dugme dugme--ikincil" href="#konum" data-yol><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Yol tarifi</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="bolum" id="fiyatlar">
+    <div class="kap dar">
+      <h2>Hizmetler ve fiyatlar</h2>
+      <p class="aciklama">Fiyatlar kapıda ne görürseniz o. Sürpriz yok.</p>
+      <ul class="fiyatlar">
+        <li><span class="is">Saç kesimi<span class="not">Yıkama ve şekillendirme dahil</span></span><span class="nokta"></span><span class="tutar">400 TL</span></li>
+        <li><span class="is">Sakal tıraşı<span class="not">Sıcak havlu ve ustura</span></span><span class="nokta"></span><span class="tutar">200 TL</span></li>
+        <li><span class="is">Saç ve sakal</span><span class="nokta"></span><span class="tutar">550 TL</span></li>
+        <li><span class="is">Çocuk saç kesimi<span class="not">12 yaş altı</span></span><span class="nokta"></span><span class="tutar">300 TL</span></li>
+        <li><span class="is">Cilt bakımı<span class="not">Temizlik, maske ve masaj</span></span><span class="nokta"></span><span class="tutar">450 TL</span></li>
+        <li><span class="is">Damat tıraşı<span class="not">Saç, sakal, cilt bakımı ve fotoğraf için hazırlık</span></span><span class="nokta"></span><span class="tutar">2.500 TL</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="bolum" aria-labelledby="salon">
+    <div class="kap">
+      <h2 id="salon">Salondan</h2>
+      <p class="aciklama">Gerçek sitede burada sizin salonunuzun ve işlerinizin fotoğrafları yer alır.</p>
+      <div class="galeri">
+        <img src="../img/berber-2.jpg" alt="Berber müşterinin saçını şekillendiriyor" loading="lazy" width="900" height="600">
+        <img src="../img/berber-3.jpg" alt="Tuğla duvarlı berber salonu" loading="lazy" width="900" height="1350">
+        <img src="../img/berber-4.jpg" alt="İki berber müşterilerle çalışıyor" loading="lazy" width="900" height="1125">
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum" id="konum" aria-labelledby="saatler-baslik">
+    <div class="kap konum">
+      <div>
+        <h2 id="saatler-baslik">Saatler ve konum</h2>
+        <table class="saatler"><tbody></tbody></table>
+        <p class="adres">Haritada "<span data-ad></span>, <span data-sehir></span>" araması görünüyor. Gerçek sitede açık adresiniz burada yazar.</p>
+      </div>
+      <iframe class="harita" title="Harita" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="alt">
+  <div class="kap">
+    <div><strong data-ad>Usta Berber</strong><br><a href="#" data-ornek="instagram">Instagram</a></div>
+    <div>Bu sayfa bir örnektir.<br>Hazırlayan: Eyüp Kaan Amanvermez</div>
+  </div>
+</footer>
+
+<nav class="alt-cubuk" aria-label="Hızlı erişim">
+  <a href="#" data-ornek="ara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Ara</a>
+  <a href="#" data-ornek="whatsapp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Randevu</a>
+  <a href="#konum" data-yol><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Yol tarifi</a>
+</nav>
+
+<script src="../ortak.js"></script>
+</body>
+</html>
