@@ -173,6 +173,14 @@
     d.append(s, p, b); kap.append(d);
   });
 
+  // Hazır bağlantıyla gelinirse (mesaj/?ad=...&kol=...) alanları doldur
+  var gelen = new URLSearchParams(location.search);
+  if (gelen.get('ad')) ad.value = gelen.get('ad').replace(/-/g, ' ').slice(0, 48);
+  if (gelen.get('sehir')) sehir.value = gelen.get('sehir').replace(/-/g, ' ').slice(0, 30);
+  if (OZELLIK.hasOwnProperty(gelen.get('kol'))) {
+    document.querySelectorAll('input[name=kol]').forEach(function (r) { r.checked = r.value === gelen.get('kol'); });
+  }
+
   guncelle(); listele();
 })();
 </script>
