@@ -14,6 +14,13 @@
   document.querySelectorAll('[data-sehir]').forEach(function (e) { e.textContent = sehir; });
   document.title = ad + ' | ' + body.dataset.tur;
 
+  // Yöresel menü satırları: Karadeniz şehirlerinde kuymak ve Laz böreği, başka yerde genel karşılıkları
+  var KARADENIZ = ['trabzon', 'rize', 'artvin', 'giresun', 'ordu', 'samsun', 'sinop', 'kastamonu', 'bartın', 'zonguldak', 'düzce', 'gümüşhane', 'bayburt'];
+  var karadeniz = KARADENIZ.indexOf(sehir.toLocaleLowerCase('tr')) >= 0;
+  document.querySelectorAll('[data-yerel]').forEach(function (e) {
+    e.hidden = (e.dataset.yerel === 'karadeniz') !== karadeniz;
+  });
+
   var baslik = document.querySelector('.ad');
   if (baslik) baslik.dataset.uzun = ad.length > 22 ? 'cok' : ad.length > 12 ? 'orta' : 'kisa';
 
